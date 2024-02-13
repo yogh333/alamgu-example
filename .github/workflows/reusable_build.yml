@@ -84,6 +84,7 @@ jobs:
               BIN_DIR_NAME="$(echo ${{ matrix.device }} | sed 's/nanosp/nanos2/')" && \
               cd ${{ needs.call_get_app_metadata.outputs.build_directory }} && \
               cargo ledger build ${BUILD_DEVICE_NAME} -- -Zunstable-options --out-dir=./build/${BIN_DIR_NAME}/bin/ && \
+              echo "Get APP_NAME" && \
               APP_NAME=$(grep -E '^\s*name\s*=\s*' Cargo.toml | head -n 1 | awk -F'["]' '{print $2}') && \
               echo "APP_NAME is ${APP_NAME}" && \
               mv ./build/${BIN_DIR_NAME}/bin/${APP_NAME} ./build/${BIN_DIR_NAME}/bin/app.elf && \
