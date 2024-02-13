@@ -1,0 +1,19 @@
+name: Build and run functional tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+      - develop
+      - develop-sync
+  pull_request:
+
+jobs:
+  build_application:
+    name: Build application using the reusable workflow
+    uses: ./.github/workflows/reusable_build.yml
+    with:
+      upload_app_binaries_artifact: "compiled_app_binaries"
+      builder: ledger-app-builder
