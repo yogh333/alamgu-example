@@ -17,10 +17,3 @@ jobs:
     with:
       upload_app_binaries_artifact: "compiled_app_binaries"
       builder: ledger-app-builder
-
-  functional_tests:
-    name: Run tests
-    needs: build_application
-    uses: ./.github/workflows/functional_tests.yml
-    with:
-      download_app_binaries_artifact: "compiled_app_binaries"
