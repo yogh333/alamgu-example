@@ -85,7 +85,7 @@ jobs:
               cd ${{ needs.call_get_app_metadata.outputs.build_directory }} && \
               cargo ledger build ${BUILD_DEVICE_NAME} -- -Zunstable-options --out-dir=./build/${BIN_DIR_NAME}/bin/ && \
               echo "Get APP_NAME" && \
-              APP_NAME=$(grep -E '^\s*name\s*=\s*' Cargo.toml | head -n 1 | awk -F'["]' '{print $2}') && \
+              APP_NAME=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[].name') && \
               echo "APP_NAME is ${APP_NAME}" && \
               mv ./build/${BIN_DIR_NAME}/bin/${APP_NAME} ./build/${BIN_DIR_NAME}/bin/app.elf && \
               echo "Binary ${APP_NAME} copied as ./build/${BIN_DIR_NAME}/bin/app.elf"
